@@ -10,8 +10,8 @@ public class FileReader {
     public Profile getDataFromFile(File file) {
         try (FileInputStream inputStream = new FileInputStream(file)){
             return new Profile(inputStream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ignored){
+            return null;
         }
     }
 }
