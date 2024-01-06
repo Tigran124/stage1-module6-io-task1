@@ -1,11 +1,17 @@
 package com.epam.mjc.io;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-        return new Profile();
+        try (FileInputStream inputStream = new FileInputStream(file)){
+            return new Profile(inputStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
