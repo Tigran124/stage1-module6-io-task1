@@ -12,27 +12,23 @@ public class Profile {
     private Long phone;
 
     public Profile(FileInputStream inputStream) throws IOException {
-        try {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1){
-                String content = new String(buffer, 0, bytesRead);
-                String[] lines = content.split(System.lineSeparator());
-                for (String st: lines){
-                    String[] parts = st.split(" ");
-                    if (Objects.equals(parts[0], "Name:")){
-                        this.name = parts[1];
-                    }else if (Objects.equals(parts[0], "Age:")){
-                        this.age = Integer.valueOf(parts[1]);
-                    }else if (Objects.equals(parts[0], "Email:")){
-                        this.email = parts[1];
-                    }else if (Objects.equals(parts[0], "Phone:")){
-                        this.phone = Long.valueOf(parts[1]);
-                    }
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1){
+            String content = new String(buffer, 0, bytesRead);
+            String[] lines = content.split(System.lineSeparator());
+            for (String st: lines){
+                String[] parts = st.split(" ");
+                if (Objects.equals(parts[0], "Name:")){
+                    this.name = parts[1];
+                }else if (Objects.equals(parts[0], "Age:")){
+                    this.age = Integer.valueOf(parts[1]);
+                }else if (Objects.equals(parts[0], "Email:")){
+                    this.email = parts[1];
+                }else if (Objects.equals(parts[0], "Phone:")){
+                    this.phone = Long.valueOf(parts[1]);
                 }
             }
-        }catch (IOException e){
-            throw e;
         }
     }
     public Profile(String name, Integer age, String email, Long phone) {
